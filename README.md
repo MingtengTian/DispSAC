@@ -1,7 +1,21 @@
-<img width="1224" height="417" alt="image" src="https://github.com/user-attachments/assets/8c1d0b5d-2f2f-43ad-9f07-5804f6565be5" />
-Surface Wave Inversion Method Based on Off-policy Reinforce Learning SAC Algorithm
+<img width="612" height="209" alt="image" src="https://github.com/user-attachments/assets/8c1d0b5d-2f2f-43ad-9f07-5804f6565be5" />
 
-ABSTRACT
-Surface wave inversion (SWI) is a method to explore the shear wave velocity structure in the crust and upper mantle, which is one of the primary exploration methods for seismological imaging. Currently, SWI is dominated by two families of methods: linearized inversion, which is fast but local-minimum prone and strongly dependent on the initial v_s model; and Baysian inversion such as MCMC, which yields a posterior but at a notoriously computational cost. Recently, with the rise of available computes, machine-learning-based SWI has been booming as an attempt to address the drawbacks of both. However, modern SWI based on machine learning has three drawbacks. First, they often enforce one-to-one mapping in training stage, severely ignoring the ill-posed and multi-solution nature of SWI. Second, SWI based on one-to-one mapping makes trained model show the strong dependence on the synthetic datasets used in training stage. Third, SWI based on supervised learning can’t accurately estimate posterior uncertainty like what Baysian method such as MCMC does. Therefore, we proposed isotropic surface wave inversion method based on reinforce learning--DispSAC. At the training stage, we trained the agent on synthetic Rayleigh wave dispersion constructed from smooth isotropic v_s, which are approximated from randomly generated B-spline coefficients. At the inference stage, after giving many totally different initial parameter vectors, they would finally converge to same target v_s profiles and dispersion efficiently, showing strong robustness. In a nutshell, our method has following innovations: (1) Avoiding the rigid one-to-one mapping; (2) Enabling estimating uncertainty more naturally and accurately; (3) Trainable without labels; (4) Trainable on CPU clusters; (5) Potential in the joint inversion. Eventually, our method shows better results than MCMC and one-to-one mapping method in accuracy test. Overall, DispSAC can be considered as an improvement over Baysian method by making MCMC learn trails and errors, which displays a new algorithm diagram rarely leveraged in geophysical inversion problems, providing valuable sight for other geophysical inversion. 
+This is the python codes package for DispSAC that is a surface wave inversion method based on soft actor-critic algorithm of off-policy reinforce learning. The preprint paper can be accessed in https://eartharxiv.org/repository/view/15137/.
 
-<img width="1080" height="1440" alt="Screenshot 2026-07-14 224405" src="https://github.com/user-attachments/assets/0c2e399d-3ba3-473d-ac74-14e05b9ac1a1" />
+These python codes built a DispSAC agent training how to decrease misfit in the direction of maximal return. There are few components for the 
+
+"config.py": adjust training hyper-parameters. 
+
+"augmentation.py": adjust the Gaussian noise and Cutting mechnism. 
+
+"environment.py": run forward simulations and calculate the reward. 
+
+"network.py": define the network architecture of actor and critic. 
+
+"replay_buffer.py": define the buffer for replaying prioritized transitions, making agent learngs from previous experience.
+
+"sac.py": define the learning loss for neural network. Define the order of backpropogation. 
+
+"utils.py": 
+
+Related training data and test data can be assessed in the Hugging Face https://huggingface.co/datasets/MintonTian/DispSAC. 
