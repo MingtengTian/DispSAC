@@ -2,7 +2,7 @@
 
 This is the python codes package for DispSAC that is a surface wave inversion method based on soft actor-critic algorithm of off-policy reinforce learning. The preprint paper can be accessed in https://eartharxiv.org/repository/view/15137/.
 
-These python codes built a DispSAC agent training how to decrease misfit in the direction of maximal return. There are few components for the 
+These python codes built a DispSAC agent training how to decrease misfit in the direction of maximal return. There are few components: 
 
 "config.py": defines the training and inversion settings. It groups the network dimensions, learning rates, replay-buffer settings, action scales, reward coefficients, data paths, and physical parameter bounds.
 
